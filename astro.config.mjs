@@ -7,10 +7,9 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-	// TODO: replace with your GitHub Pages URL.
 	site: 'https://twilightharvest.github.io',
-	// TODO: if the repo is NOT named `YOUR-USERNAME.github.io`, uncomment and set to '/<repo-name>'.
-	// base: '/blog',
+	// Project site: served from /blog/ because the repo is not named twilightharvest.github.io.
+	base: '/blog',
 	integrations: [mdx(), sitemap()],
 	markdown: {
 		remarkPlugins: [remarkMath],
