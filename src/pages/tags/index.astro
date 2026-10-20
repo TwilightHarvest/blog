@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPublishedPosts, getTags, url } from '../../utils/posts';
+
+const tags = getTags(await getPublishedPosts());
+---
+
+<Base title="Tags">
+	<h1>Tags</h1>
+	<ul>
+		{
+			[...tags].map(([tag, count]) => (
+				<li>
+					<a href={url(`tags/${tag}/`)}>#{tag}</a> <span class="muted">({count})</span>
+				</li>
+			))
+		}
+	</ul>
+</Base>
+
+<style>
+	ul {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+	}
+	a {
+		color: var(--fg);
+		text-decoration: none;
+	}
+	a:hover {
+		color: var(--accent);
+	}
+	.muted {
+		font-size: 0.85rem;
+	}
+</style>

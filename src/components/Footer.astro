@@ -1,0 +1,28 @@
+---
+import { AUTHOR, GITHUB_URL } from '../consts';
+import { url } from '../utils/posts';
+---
+
+<footer>
+	<span>© {new Date().getFullYear()} {AUTHOR}</span>
+	<span><a href={url('rss.xml')}>RSS</a> · <a href={GITHUB_URL}>GitHub</a></span>
+</footer>
+
+<style>
+	footer {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.5rem;
+		padding: 1.5rem 0 2.5rem;
+		border-top: 1px solid var(--border);
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+	a {
+		color: var(--muted);
+	}
+	a:hover {
+		color: var(--fg);
+	}
+</style>

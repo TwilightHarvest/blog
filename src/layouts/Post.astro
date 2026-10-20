@@ -1,0 +1,61 @@
+---
+import Base from './Base.astro';
+import { formatDate, readingTime, url, type Post } from '../utils/posts';
+
+interface Props {
+	post: Post;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = post.data;
+---
+
+<Base title={title} description={description}>
+	<article>
+		<header>
+			<h1>{title}</h1>
+			<p class="meta muted">
+				<time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+				{updatedDate && <span> · updated {formatDate(updatedDate)}</span>}
+				<span> · {readingTime(post.body)}</span>
+			</p>
+			{
+				tags.length > 0 && (
+					<p class="tags">
+						{tags.map((tag) => (
+							<a href={url(`tags/${tag}/`)}>#{tag}</a>
+						))}
+					</p>
+				)
+			}
+		</header>
+		<slot />
+	</article>
+</Base>
+
+<style>
+	header {
+		margin-bottom: 2.5rem;
+	}
+	h1 {
+		margin-bottom: 0.4rem;
+	}
+	.meta {
+		margin: 0;
+		font-size: 0.9rem;
+	}
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin: 0.4rem 0 0;
+		font-size: 0.9rem;
+	}
+	.tags a {
+		color: var(--muted);
+		text-decoration: none;
+	}
+	.tags a:hover {
+		color: var(--accent);
+	}
+</style>

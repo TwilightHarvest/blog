@@ -1,16 +1,34 @@
 ---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPublishedPosts, url } from '../utils/posts';
+
+const posts = (await getPublishedPosts()).slice(0, 8);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+	<section class="intro">
+		<h1>Hi, I'm Trevor.</h1>
+		<p>
+			I'm a computer science student. I write here about algorithms, systems, and whatever I'm currently trying to
+			understand.
+		</p>
+	</section>
+
+	<h2>Recent posts</h2>
+	<PostList posts={posts} />
+	<p><a href={url('posts/')}>All posts →</a></p>
+</Base>
+
+<style>
+	.intro {
+		margin-bottom: 1rem;
+	}
+	h2 {
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--muted);
+		margin-top: 2.5rem;
+	}
+</style>
